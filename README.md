@@ -98,7 +98,22 @@ Integrated_Webcam_HD: Integrate (usb-0000:00:14.0-3):
 
 In this example the thermal camera is "USB Camera" and the device number is **4** (from /dev/video4).
 
-Assuming the device number is 0 simply issue: **python3 tc001v4.2.py --device 0**
+### Using the Wrapper Script (Recommended)
+
+The easiest way to run the program is using the `run.py` wrapper script:
+
+```bash
+./run.py -l, --list     List available video devices
+./run.py -u, --use <n>  Run thermal camera with specified device number
+./run.py -i, --install  Install required dependencies (python3-opencv, v4l-utils)
+./run.py -h, --help     Show this help message
+```
+
+For example: **./run.py -u 4**
+
+### Running Directly
+
+Alternatively, you can run the main script directly: **python3 src/tc001v4.2.py --device 4**
 
 **Note**
 This is in Alpha. No error checking has been implemented yet! So if the program tries to start, then quits, either a camera is not connected, or you have entered the wrong device number.
