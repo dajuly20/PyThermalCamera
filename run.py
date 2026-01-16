@@ -47,15 +47,10 @@ def print_usage():
     print("""PyThermalCamera - Thermal Camera Software for Topdon TC001
 
 Usage:
-  ./run.py --devices              List available video devices
-  ./run.py --dev <number>         Run thermal camera with specified device number
-  ./run.py --install-dependencies Install required dependencies (python3-opencv, v4l-utils)
-  ./run.py -h, --help             Show this help message
-
-Examples:
-  ./run.py --install-dependencies # Install dependencies
-  ./run.py --devices              # List all video devices
-  ./run.py --dev 4                # Run with device /dev/video4
+  ./run.py -l, --list     List available video devices
+  ./run.py -u, --use <n>  Run thermal camera with specified device number
+  ./run.py -i, --install  Install required dependencies (python3-opencv, v4l-utils)
+  ./run.py -h, --help     Show this help message
 """)
 
 def main():
@@ -67,9 +62,9 @@ def main():
         description="PyThermalCamera - Thermal Camera Software for Topdon TC001",
         add_help=False
     )
-    parser.add_argument("--devices", action="store_true", help="List available video devices")
-    parser.add_argument("--dev", type=int, metavar="<number>", help="Device number to use")
-    parser.add_argument("--install-dependencies", action="store_true", help="Install required dependencies")
+    parser.add_argument("-l", "--list", action="store_true", help="List available video devices")
+    parser.add_argument("-u", "--use", type=int, metavar="<n>", help="Device number to use")
+    parser.add_argument("-i", "--install", action="store_true", help="Install required dependencies")
     parser.add_argument("-h", "--help", action="store_true", help="Show this help message")
 
     args = parser.parse_args()
@@ -78,12 +73,12 @@ def main():
         print_usage()
         sys.exit(0)
 
-    if args.install_dependencies:
+    if args.install:
         install_dependencies()
-    elif args.devices:
+    elif args.list:
         list_devices()
-    elif args.dev is not None:
-        run_camera(args.dev)
+    elif args.use is not None:
+        run_camera(args.use)
     else:
         print_usage()
         sys.exit(1)
