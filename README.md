@@ -63,6 +63,10 @@ Python3 OpenCV Must be installed:
 
 Run: **sudo apt-get install python3-opencv**
 
+v4l-utils is also required to list video devices:
+
+Run: **sudo apt install v4l-utils**
+
 
 
 ## Running the Program
@@ -75,6 +79,24 @@ In src you will find two programs:
 **tc001v4.2.py** The main program!
 
 To run it plug in the thermal camera and run: **v4l2-ctl --list-devices** to list the devices on the system. You will need its device number.
+
+```bash
+❯ v4l2-ctl --list-devices
+USB Camera: USB Camera (usb-0000:00:14.0-12.3.2.4.3):
+        /dev/video4
+        /dev/video5
+        /dev/media2
+
+Integrated_Webcam_HD: Integrate (usb-0000:00:14.0-3):
+        /dev/video0
+        /dev/video1
+        /dev/video2
+        /dev/video3
+        /dev/media0
+        /dev/media1
+```
+
+In this example the thermal camera is "USB Camera" and the device number is **4** (from /dev/video4).
 
 Assuming the device number is 0 simply issue: **python3 tc001v4.2.py --device 0**
 
